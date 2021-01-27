@@ -38,10 +38,10 @@ This builds all directory combinations (according with the wordlist) for all tar
 
 ```bash
 urlxeff -t target -wl wl.txt -m single-sub -n single-sub
- ```
+```
 This builds all subdomain combinations (according with the wordlist) for a single target.
 
-````bash
+```bash
 urlxeff -tw twl.txt -wl wl.txt -m multiple-sub -n multiple-sub
 ```
 This builds all subdomain combinations (according with the wordlist) for all targets on the list.
