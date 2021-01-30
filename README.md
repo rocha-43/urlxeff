@@ -48,4 +48,4 @@ This builds all subdomain combinations (according with the wordlist) for all tar
 
 You can always change the -n flag for what you want...
 
-If you use ```bash -p```, it don't put http:// as a prefix.
+If you use ```-p```, it don't put http:// as a prefix.
