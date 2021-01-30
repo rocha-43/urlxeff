@@ -47,3 +47,5 @@ urlxeff -tw twl.txt -wl wl.txt -m multiple-sub -n multiple-sub
 This builds all subdomain combinations (according with the wordlist) for all targets on the list.
 
 You can always change the -n flag for what you want...
+
+If you use ```bash -p```, it don't put http:// as a prefix.
