@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func Ssubdomain(base string, wordlist string, outName string) {
+func Ssubdomain(base string, wordlist string, outName string, wprefix bool) {
 	file, err := os.Open(wordlist)
 	if err != nil {
 		log.Fatal("[!] Can't open the wordlist...")
@@ -30,10 +30,18 @@ func Ssubdomain(base string, wordlist string, outName string) {
 	defer outFile.Close()
 
 	for scanner.Scan() {
-		value := fmt.Sprintf("http://%s.%s\n", scanner.Text(), base)
-		_, err := outFile.WriteString(value)
-		if err != nil {
-			log.Fatal("[!] Can't write to the output file...")
+		if wprefix {
+			value := fmt.Sprintf("%s.%s\n", scanner.Text(), base)
+			_, err := outFile.WriteString(value)
+			if err != nil {
+				log.Fatal("[!] Can't write to the output file...")
+			}
+		} else {
+			value := fmt.Sprintf("http://%s.%s\n", scanner.Text(), base)
+			_, err := outFile.WriteString(value)
+			if err != nil {
+				log.Fatal("[!] Can't write to the output file...")
+			}
 		}
 	}
 }

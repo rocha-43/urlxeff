@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func Mdirectory(targetsList string, wordlist string, outName string) {
+func Mdirectory(targetsList string, wordlist string, outName string, wprefix bool) {
 
 	file, err := os.Open(wordlist)
 	if err != nil {
@@ -53,10 +53,18 @@ func Mdirectory(targetsList string, wordlist string, outName string) {
 
 	for _, base := range targets {
 		for _, cont := range payload {
-			value := fmt.Sprintf("http://%s/%s\n", base, cont)
-			_, err := outFile.WriteString(value)
-			if err != nil {
-				log.Fatal("[!] Can't write the output")
+			if wprefix {
+				value := fmt.Sprintf("%s/%s\n", base, cont)
+				_, err := outFile.WriteString(value)
+				if err != nil {
+					log.Fatal("[!] Can't write the output")
+				}
+			} else {
+				value := fmt.Sprintf("http://%s/%s\n", base, cont)
+				_, err := outFile.WriteString(value)
+				if err != nil {
+					log.Fatal("[!] Can't write the output")
+				}
 			}
 		}
 	}

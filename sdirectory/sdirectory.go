@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func Sdirectory(base string, wordlist string, outName string) {
+func Sdirectory(base string, wordlist string, outName string, wprefix bool) {
 
 	file, err := os.Open(wordlist)
 	if err != nil {
@@ -31,10 +31,18 @@ func Sdirectory(base string, wordlist string, outName string) {
 	defer outFile.Close()
 
 	for scanner.Scan() {
-		value := fmt.Sprintf("http://%s/%s\n", base, scanner.Text())
-		_, err := outFile.WriteString(value)
-		if err != nil {
-			log.Fatal("[!] Can't write to the output file...")
+		if wprefix {
+			value := fmt.Sprintf("%s/%s\n", base, scanner.Text())
+			_, err := outFile.WriteString(value)
+			if err != nil {
+				log.Fatal("[!] Can't write to the output file...")
+			}
+		} else {
+			value := fmt.Sprintf("http://%s/%s\n", base, scanner.Text())
+			_, err := outFile.WriteString(value)
+			if err != nil {
+				log.Fatal("[!] Can't write to the output file...")
+			}
 		}
 	}
 }
